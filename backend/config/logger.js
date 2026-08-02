@@ -1,0 +1,33 @@
+const winston = require('winston');
+const { logLevel, nodeEnv } = require('./env');
+
+const logger = winston.createLogger({
+  level: logLevel,
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.errors({ stack: true }),
+    winston.format.json()
+  ),
+  defaultMeta: { service: 'ai-customer-psych-backend' },
+  transports: [
+    new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'logs/combined.log' }),
+  ],
+});
+
+// In dev, also print readable logs to the console
+if (nodeEnv !== 'production') {
+  logger.add(
+    new winston.transports.Console({
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.printf(({ level, message, timestamp, ...meta }) => {
+          const extra = Object.keys(meta).length ? JSON.stringify(meta) : '';
+          return `${timestamp} [${level}] ${message} ${extra}`;
+        })
+      ),
+    })
+  );
+}
+
+module.exports = logger;
