@@ -1,11 +1,9 @@
 const Report = require("../models/Report.model");
 const { validateAnalyzeInput } = require("../utils/validateInput");
 const { scrapeStore } = require("../services/scraper.service");
-const { runMockAnalysis } = require("../services/mockAi.service");
-const { useMockAi } = require("../config/env");
+const { runAnalysis } = require("../services/aiClient.service");
 const logger = require("../config/logger");
 const { AppError } = require("../middleware/errorHandler");
-
 /**
  * Runs in the background AFTER we've already responded to the client with a reportId.
  * Updates the Report document as it progresses through each step.
@@ -30,15 +28,7 @@ async function runPipeline(reportId) {
     report.status = "analyzing";
     await report.save();
 
-    let aiResult;
-    if (useMockAi) {
-      aiResult = await runMockAnalysis({ input: report.input, scrapedData });
-    } else {
-      throw new AppError(
-        "Real AI service not connected yet. Set USE_MOCK_AI=true in .env",
-        501,
-      );
-    }
+    const aiResult = await runAnalysis({ input: report.input, scrapedData });
 
     report.aiResult = aiResult;
     report.status = "completed";
