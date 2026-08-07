@@ -1,0 +1,47 @@
+Feature Title & High-Level Summary:
+
+Title: Dynamic Multi-Agent Focus Group & Public Opinion Simulation Engine
+
+Concept: Simulating a real-world market launch by executing a parallel panel of 15 to 30 distinct AI Customer Personas that evaluate an e-commerce platform and synthesize aggregated public opinion insights.
+
+Core Objectives & Value Proposition:
+
+Eliminates expensive, manual focus groups by automating risk-free pre-launch market testing.
+
+Identifies conversion bottlenecks, emotional friction, and price sensitivities instantly across diverse consumer demographics.
+
+User Flow & Input Data Model (The Entrepreneur’s Form):
+
+Website & Brand Context: Brand Name, Product URL/Description, Product Category, Pricing Tier, Key Competitive Advantages.
+
+Target Demographic Filters: Age Bracket, Gender Alignment, Economic Bracket, Geographic Region.
+
+Evaluation Focus Intent: UX/UI Friction, Pricing & Value Perception, Trust & Security, Product Variety, Purchase Funnel Speed.
+
+Engine Mechanics (Dynamic Trait Injection & Execution):
+
+Base Persona Pool (15–30 Static Core Personas): Fixed behavioral traits (e.g., Hesitant Skeptic, Impulse Shopper, Bargain Hunter, Brand Loyalist, Detail-Oriented Analyst).
+
+Dynamic Context Injection: Real-time merging of user inputs with base persona traits to synthesize context-aware virtual customers.
+
+Asynchronous Parallel Execution: Asynchronous concurrent execution via Python asyncio to keep total response time under 8 seconds.
+
+Output Data Model & Aggregated Report Structure (JSON Schema):
+
+Executive Metrics: Projected Conversion Rate (Overall Intent Score %), Sentiment Breakdown (Positive vs. Neutral vs. Negative).
+
+Consensus Analytics: Top 3 Friction Points (Consensus Deal-Breakers), Dominant Consumer Perception.
+
+Individual Agent Breakdown: Detailed per-agent feedback containing individual purchase scores, emotional reactions, and specific objections.
+
+Actionable Merchant Roadmap: Prioritized recommendations sorted by business impact.
+
+System Architecture & Tech Stack Strategy:
+
+AI Layer: Python 3.11+, google-genai SDK (gemini-2.0-flash), asyncio for concurrent execution, structured JSON output enforcement.
+
+Backend Layer: FastAPI / Express.js REST API delivering structured JSON endpoints.
+
+Frontend Layer: React / Next.js with Tailwind CSS, utilizing progress bars, pie charts, and friction callout cards.
+
+DevOps Layer: Dockerized microservices deployed on Vercel / Render / AWS with continuous integration via GitHub Actions.
